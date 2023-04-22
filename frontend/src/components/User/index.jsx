@@ -9,7 +9,7 @@ export default function Test() {
    
     useEffect(() => {
         if (data) {
-            setAlignments(data.alignments)
+            setAlignments(data.monsters)
         }
     
     }, [data] )
@@ -20,7 +20,7 @@ export default function Test() {
     }
 
     if (error) {
-        return <div>Error somehwere</div>
+        return <div>Error somewhere</div>
     }
  
     return (
@@ -28,7 +28,7 @@ export default function Test() {
             {alignments.map(alignment => 
                     <div key={alignment.index}>
                         <p key={alignment.index} className="text-3xl font-bold underline">{alignment.name}</p>
-                        <p>{alignment.desc}</p>
+                        
                         <br />
                     </div>
                 )}

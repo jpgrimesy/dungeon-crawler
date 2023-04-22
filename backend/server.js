@@ -4,11 +4,16 @@ const express = require('express');
 const cors = require('cors')
 const db = require('./models');
 const app = express();
+const charactersCtrl = require('./controllers/characters')
+const usersCtrl = require('./controllers/users')
+
 
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(express.static(path.join(path.dirname(__dirname), 'frontend', 'dist')))
+app.use('/characters', charactersCtrl)
+app.use('/users', usersCtrl)
 
 
 app.get('*', (req, res) => {

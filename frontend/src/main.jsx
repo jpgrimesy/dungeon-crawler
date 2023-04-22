@@ -6,7 +6,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 const client = new ApolloClient ({
-  uri: 'https://www.dnd5eapi.co/graphql',
+  uri: import.meta.env.VITE_APOLLO_URI,
   cache: new InMemoryCache()
 })
 
