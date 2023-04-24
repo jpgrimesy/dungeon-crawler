@@ -12,8 +12,8 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(express.static(path.join(path.dirname(__dirname), 'frontend', 'dist')))
-app.use('/characters', charactersCtrl)
-app.use('/users', usersCtrl)
+app.use('/api/characters', charactersCtrl)
+app.use('/api/users', usersCtrl)
 
 
 app.get('*', (req, res) => {
