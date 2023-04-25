@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
-import { TEST_GQL } from "../../GraphQL/Queries";
+import { RACES } from "../../GraphQL/Queries";
 
 
 export default function Test() {
-    const { error, loading, data } = useQuery(TEST_GQL)
+    const { error, loading, data } = useQuery(RACES)
     const [alignments, setAlignments] = useState([])
    
     useEffect(() => {
@@ -25,13 +25,13 @@ export default function Test() {
  
     return (
         <>
-            {alignments.map(alignment => 
+            {/* {alignments.map(alignment => 
                     <div key={alignment.index}>
                         <p key={alignment.index} className="text-3xl font-bold underline">{alignment.name}</p>
                         
                         <br />
                     </div>
-                )}
+                )} */}
                 
         </>
     )
