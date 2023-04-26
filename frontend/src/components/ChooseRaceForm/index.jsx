@@ -60,20 +60,54 @@ function ChooseRaceForm(props) {
                                     {race.traits.map( trait => 
                                         <>
             
-                                        <li className="pb-1">
+                                         <li className="pb-1">
                                             {trait.name}
                                         </li>
                                         <li class="pb-2 text-sm">
                                             {trait.desc[0]}
                                         </li>
+                                        {trait.proficiency_choices &&
+                                        <>
+                                        <li>Please Choose</li>
+                                        <select name={trait.proficiency_choices.type} id={trait.proficiency_choices.type}>
+                                            {trait.proficiency_choices.from.options.map(option =>
+                                                <option>{option.item.name}</option>
+                                                )}
+                                        </select>
+                                        <br />
+                                        </>
+                                        }
+                                        {trait.proficiency_choices && trait.proficiency_choices.choose > 1 && 
+                                        <>
+                                        <li>Please Choose</li>
+                                        <select name={trait.proficiency_choices.type}>
+                                            {trait.proficiency_choices.from.options.map(option =>
+                                                <option>{option.item.name}</option>
+                                                )}
+                                        </select>
+                                        <br />
+                                        </>}
+                                        <br />
                                         </>
                                         )}
+                                     
                                         <li className="pb-1">
-                                            Language(s)
+                                            Languages
                                         </li>
-                                        <li class="pb-2 text-sm">
+                                        <li className="pb-2 text-sm">
                                             {race.language_desc}
                                         </li>
+                                        <br />
+                                        {race.language_options && 
+                                            <>
+                                            <li>Choose Language:</li>
+                                            <select name="language" id="language">
+                                                {race.language_options.from.options.map(language =>
+                                                    <option>{language.item.name}</option>
+                                                    )}
+                                            </select>
+                                            </>
+                                        }
                                 </ul>
                                 <button onClick={handleRaceSelect} value={race.index} name='race' className="px-8 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">Choose Race</button>
                             </div>

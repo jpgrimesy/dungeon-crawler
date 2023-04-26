@@ -63,16 +63,19 @@ function ChooseClassForm(props) {
                         </p>
                         <p>
                         {charClass.proficiencies.map((proficiency, i) =>
-                        <span key={i} className="rounded-full bg-purple-100 px-2.5 py-0.5 mx-1 text-md text-purple-600">{proficiency.name}</span>
+                        <span key={i} className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 mx-1 text-md text-purple-600">{proficiency.name}</span>
                             )}
                         </p>
                         <br />
                         <p>
                             Saving Throws
                         </p>
-                        {charClass.saving_throws.map((savingThrow, i) =>
+                        <p>
+                            {charClass.saving_throws.map((savingThrow, i) =>
                         <span key={i} className="rounded-full bg-purple-100 px-2.5 py-0.5 mx-1 text-md text-purple-600">{savingThrow.name}</span>
                             )}
+                        </p>
+                        <br />
                               <button onClick={handleClassSelect} value={charClass.index} name='class' className="px-8 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">Choose Class</button>
                             </div>
                         </div>

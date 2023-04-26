@@ -7,10 +7,36 @@ export const RACES = gql`
               desc
               name
               index
+              proficiency_choices {
+                desc
+                from {
+                  options {
+                    ... on ProficiencyReferenceOption {
+                      item {
+                        name
+                        index
+                      }
+                    }
+                  }
+                }
+                choose
+                type
+              }
             }
             name
             index
             language_desc
+            language_options {
+                from {
+                  options {
+                    item {
+                      name
+                      index
+                    }
+                  }
+                }
+                choose
+              }
           }
     }
 `
