@@ -9,6 +9,8 @@ function ChooseRaceForm(props) {
     const navigate = useNavigate()
     const { error, loading, data } = useQuery(RACES)
     const [formOptions, setFormOptions] = useState([])
+    const [proficiencies, setProficiencies] = useState([])
+    const [language, setLanguage] = useState([])
 
     useEffect(() => {
         if (data) {
@@ -28,11 +30,33 @@ function ChooseRaceForm(props) {
 
     function handleRaceSelect(e) {
         e.preventDefault()
-        props.setFormData({
+        if(language) {
+            console.log('working')
+            props.setFormData({
+                ...props.formData,
+                [e.target.name]: e.target.value,
+                proficiencies: proficiencies,
+                languages: language
+            })
+        } else {
+          props.setFormData({
             ...props.formData,
-            [e.target.name]: e.target.value
-        })
+            [e.target.name]: e.target.value,
+            proficiencies: proficiencies
+        })  
+        }
+        
 
+    }
+
+    function handleChange(e) {
+        if (!proficiencies.includes(e.target.value)) {
+            setProficiencies([...proficiencies, e.target.value])
+        }
+    }
+
+    function handleLanguage(e) {
+        setLanguage(e.target.value)
     }
 
     return (
@@ -69,9 +93,10 @@ function ChooseRaceForm(props) {
                                         {trait.proficiency_choices &&
                                         <>
                                         <li>Please Choose</li>
-                                        <select name={trait.proficiency_choices.type} id={trait.proficiency_choices.type}>
+                                        <select onChange={handleChange} name={trait.proficiency_choices.type} id={trait.proficiency_choices.type}>
+                                            <option disabled selected value>Please Select</option>
                                             {trait.proficiency_choices.from.options.map(option =>
-                                                <option>{option.item.name}</option>
+                                                <option value={option.item.index}>{option.item.name}</option>
                                                 )}
                                         </select>
                                         <br />
@@ -80,9 +105,10 @@ function ChooseRaceForm(props) {
                                         {trait.proficiency_choices && trait.proficiency_choices.choose > 1 && 
                                         <>
                                         <li>Please Choose</li>
-                                        <select name={trait.proficiency_choices.type}>
+                                        <select onChange={handleChange} name={trait.proficiency_choices.type}>
+                                            <option disabled selected value>Please Select</option>
                                             {trait.proficiency_choices.from.options.map(option =>
-                                                <option>{option.item.name}</option>
+                                                <option value={option.item.index}>{option.item.name}</option>
                                                 )}
                                         </select>
                                         <br />
@@ -101,10 +127,11 @@ function ChooseRaceForm(props) {
                                         {race.language_options && 
                                             <>
                                             <li>Choose Language:</li>
-                                            <select name="language" id="language">
-                                                <option>Please Choose</option>
+                                            <select onChange={handleLanguage} name="language" id="language">
+                                            <option disabled selected value>Please Select</option>
+
                                                 {race.language_options.from.options.map(language =>
-                                                    <option>{language.item.name}</option>
+                                                    <option value={language.item.index}>{language.item.name}</option>
                                                     )}
                                               
                                             </select>
@@ -117,7 +144,7 @@ function ChooseRaceForm(props) {
                     </div>
                 </div>
                 )}
-            
+
             </div>
             </section> 
     )

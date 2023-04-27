@@ -29,7 +29,7 @@ function ChooseClassForm(props) {
         props.setFormData({
             ...props.formData,
             [e.target.name]: e.target.value,
-            proficiencies: proficiencies
+            proficiencies: [...props.formData.proficiencies, ...proficiencies]
         })
 
     }
