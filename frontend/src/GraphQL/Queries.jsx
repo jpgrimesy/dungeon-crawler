@@ -43,36 +43,53 @@ export const RACES = gql`
 export const CLASSES = gql`
     query {
         classes {
-        name
-        index
-        hit_die
-        proficiencies {
-            name
             index
-        }
-        spellcasting {
-            level
-            info {
             name
-            desc
+            hit_die
+            saving_throws {
+              index
+              full_name
             }
-            spellcasting_ability {
-            name
-            desc
-            index
-            }
-        }
-        saving_throws {
-            index
-            name
-        }
-        starting_equipment {
-            quantity
-            equipment {
+            spellcasting {
+              info {
+                desc
                 name
-                index
               }
-        }
+              spellcasting_ability {
+                full_name
+              }
+            }
+            class_levels {
+              features {
+                name
+                desc
+              }
+            }
+            proficiency_choices {
+              desc
+              choose
+              type
+              from {
+                options {
+                  ... on ProficiencyReferenceOption {
+                    item {
+                      name
+                      index
+                      type
+                    }
+                  }
+                }
+              }
+            }
+          }
+    }
+`
+export const ABILITIES = gql`
+    query {
+        abilityScores {
+            full_name
+            index
+            desc
         }
     }
 `

@@ -102,9 +102,11 @@ function ChooseRaceForm(props) {
                                             <>
                                             <li>Choose Language:</li>
                                             <select name="language" id="language">
+                                                <option>Please Choose</option>
                                                 {race.language_options.from.options.map(language =>
                                                     <option>{language.item.name}</option>
                                                     )}
+                                              
                                             </select>
                                             </>
                                         }

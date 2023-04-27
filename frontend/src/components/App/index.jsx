@@ -5,7 +5,6 @@ import AuthFormPage from '../AuthFormPage'
 import CharCreationForm from '../CharCreationForm'
 
 function App() {
-  const [count, setCount] = useState(0)
   
   return (
     <div className="text-center">
@@ -30,7 +29,7 @@ function App() {
       </Routes>
 
       
-      <Test />
+    
      
     </div>
 

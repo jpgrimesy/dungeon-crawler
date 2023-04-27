@@ -10,41 +10,44 @@ function ChooseClassForm(props) {
     const navigate = useNavigate()
     const { error, loading, data } = useQuery(CLASSES)
     const [formOptions, setFormOptions] = useState([])
+    const [proficiencies, setProficiencies] = useState([])
 
     useEffect(() => {
         if (data) {
            setFormOptions(data)
-           console.log(formOptions)
         }
     
     }, [data] )
     
-
-    if (loading) {
-        return <div>Loading...</div>
-    }
-
     if (error) {
         return <div>Error somewhere</div>
     }
 
     function handleClassSelect(e) {
         e.preventDefault()
+        
         props.setFormData({
             ...props.formData,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            proficiencies: proficiencies
         })
 
+    }
+    
+    function handleChange(e) {
+        if (!proficiencies.includes(e.target.value)) {
+            setProficiencies([...proficiencies, e.target.value])
+        }
     }
 
     return (
        <section className="shadow row">
-                <div className="tabs">
+            <div className="tabs">
             {formOptions.classes  && formOptions.classes.map(charClass =>
                 <div className="border-b tab">
                     <div className="border-l-2 border-transparent relative">
-                        <input className="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-6" type="checkbox" id="chck1" />
-                        <header className="flex justify-between items-center p-5 pl-8 pr-8 cursor-pointer select-none tab-label" for="chck1">
+                        <input className="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-6" type="checkbox"  />
+                        <header className="flex justify-between items-center p-5 pl-8 pr-8 cursor-pointer select-none tab-label" >
                             <span className="text-grey-darkest font-thin text-xl">
                                 {charClass.name}
                             </span>
@@ -56,37 +59,82 @@ function ChooseClassForm(props) {
                                 </svg>
                             </div>
                         </header>
-                        <div className="tab-content">
+                        <div className="tab-content overflow-auto">
                             <div className="pl-8 pr-8 pb-5 text-grey-darkest"> 
                             <p className="mt-2 line-clamp-3 font-bold text-md/relaxed text-gray-700">
-                            Proficiencies
+                            Hit Die
                         </p>
                         <p>
-                        {charClass.proficiencies.map((proficiency, i) =>
-                        <span key={i} className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 mx-1 text-md text-purple-600">{proficiency.name}</span>
-                            )}
+                            {charClass.hit_die}
                         </p>
                         <br />
-                        <p>
-                            Saving Throws
-                        </p>
+                        <p className="mt-2 line-clamp-3 font-bold text-md/relaxed text-gray-700">Saving Throws</p>
                         <p>
                             {charClass.saving_throws.map((savingThrow, i) =>
-                        <span key={i} className="rounded-full bg-purple-100 px-2.5 py-0.5 mx-1 text-md text-purple-600">{savingThrow.name}</span>
+                                <span key={i} className="rounded-full bg-purple-100 px-2.5 py-0.5 mx-1 text-md text-purple-600">{savingThrow.full_name}</span>
                             )}
                         </p>
                         <br />
-                              <button onClick={handleClassSelect} value={charClass.index} name='class' className="px-8 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">Choose Class</button>
+                        {charClass.spellcasting && charClass.spellcasting.info.map(spell =>
+                            <>
+                            <p className="mt-2 line-clamp-3 font-bold text-md/relaxed text-gray-700">
+                               {spell.name}
+                            </p>
+                            <p>
+                                {spell.desc[0]}
+                            </p>
+                            <br />
+                            </>
+                            )}
+                        {charClass.class_levels.map(classLevel => 
+                           classLevel.features && classLevel.features.map(feature =>
+                            <>
+                            <p className="mt-2 line-clamp-3 font-bold text-md/relaxed text-gray-700">
+                               {feature.name}
+                            </p>
+                            <p>
+                                {feature.desc[0]}
+                            </p>
+                            <br />
+                            </>
+                            )
+                           
+                            )}
+                            {charClass.proficiency_choices.map((proficiency, i) => {
+
+                                const selectElements = [];
+
+                                for (let j = 0; j < proficiency.choose; j++) {
+                                selectElements.push(
+                                    <>
+                                    {j === 0 && <><br /><p className="mt-2 line-clamp-3 font-bold text-xl/relaxed text-gray-700">{proficiency.desc}</p></>}
+                                    <br />
+                                    <select onChange={handleChange} name={proficiency.type}>
+                                    <option>Please Choose</option>
+                                        {proficiency.from.options.map((option) => (
+                                        <option key={option.name} value={option.item && option.item.index}>
+                                        {option.item && <>{option.item.name}</>}
+                                    </option>
+                                    ))}
+                                    </select>
+                                    <br />
+                                    </>
+                                    );
+                                }
+
+                                return selectElements;
+                            
+                            })}
+                                <br />
+                                <button onClick={handleClassSelect} value={charClass.index} name='class' className="px-8 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">Choose Class</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 )}
-            
             </div>
-            </section> 
+        </section> 
     )
-    
 }
 
 export default ChooseClassForm
