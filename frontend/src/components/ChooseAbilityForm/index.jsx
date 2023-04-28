@@ -2,11 +2,13 @@ import { useState, useEffect } from "react"
 import { ABILITIES } from "../../GraphQL/Queries"
 import { useQuery } from "@apollo/client"
 import { postCharacter } from "../../../utils/backend"
+import { useNavigate } from "react-router-dom"
 
 function ChooseAbilityForm(props) {
     const { error, loading, data } = useQuery(ABILITIES)
     const [formOptions, setFormOptions] = useState([])
-    
+    const navigate = useNavigate()
+
     useEffect(() => {
         if (data) {
            setFormOptions(data)
@@ -26,6 +28,7 @@ function ChooseAbilityForm(props) {
     function handleSubmit(e) {
         e.preventDefault()
         postCharacter({...props.formData})
+        navigate('/user')
     }
     
  return(

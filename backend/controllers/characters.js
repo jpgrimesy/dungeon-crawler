@@ -21,6 +21,11 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
+router.get('/all', authMiddleware, (req, res) => {
+    db.Character.find({userId: req.user.id})
+        .then(characters => res.json(characters))
+})
+
 router.post('/', authMiddleware, (req, res) => {
     db.Character.create({
         ...req.body,
@@ -29,12 +34,11 @@ router.post('/', authMiddleware, (req, res) => {
         .then(character => res.json(character))
 })
 router.get('/:id', authMiddleware, (req, res) => {
-    db.Character.findById({
-        ...req.body,
-        userId: req.user.id
-    })
+    db.Character.findById(req.params.id)
         .then(character => res.json(character))
 })
+
+
 router.put('/:id', authMiddleware, async (req, res) => {
     const userCharacter = await db.Character.findById(req.params.id)
     if (userCharacter.userId == req.user.id) {

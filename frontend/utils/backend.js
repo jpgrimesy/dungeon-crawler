@@ -18,3 +18,17 @@ export async function postCharacter(character) {
     return data
 }
 
+export async function allCharacters() {
+    const { data } = await axios.get('/api/characters/all', authHeader)
+    return data
+}
+
+export async function deleteCharacter(id) {
+    const { data } = await axios.delete(`/api/characters/${id}`, authHeader)
+    return data
+}
+
+export async function characterDetails(id) {
+    const { data } = await axios.get(`/api/characters/${id}`, authHeader)
+    return data
+}

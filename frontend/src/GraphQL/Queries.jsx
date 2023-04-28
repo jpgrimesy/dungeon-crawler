@@ -93,3 +93,53 @@ export const ABILITIES = gql`
         }
     }
 `
+
+const RACE_DETAILS = gql `
+    query Race($index: String, $index2: String) {
+        race(index: $index) {
+        index
+        name
+        ability_bonuses {
+            bonus
+            ability_score {
+            index
+            }
+        }
+        languages {
+            name
+        }
+        starting_proficiencies {
+            name
+            index
+        }
+        size_description
+        alignment
+        traits {
+            name
+        }
+        age
+        speed
+        }
+        class(index: $index2){
+            name
+            hit_die
+            proficiencies {
+            name
+            }
+            saving_throws {
+            full_name
+            }
+        }
+    }
+`
+
+export default function getDetails(index, index2) {
+    const { data, error, loading } = useQuery(RACE_DETAILS, {
+        variables: {
+            index,
+            index2, 
+        }
+    })
+
+    return { data, error, loading }
+}

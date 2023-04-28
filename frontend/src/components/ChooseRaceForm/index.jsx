@@ -96,7 +96,7 @@ function ChooseRaceForm(props) {
                                         <select onChange={handleChange} name={trait.proficiency_choices.type} id={trait.proficiency_choices.type}>
                                             <option disabled selected value>Please Select</option>
                                             {trait.proficiency_choices.from.options.map(option =>
-                                                <option value={option.item.index}>{option.item.name}</option>
+                                                <option>{option.item.name}</option>
                                                 )}
                                         </select>
                                         <br />
@@ -108,7 +108,7 @@ function ChooseRaceForm(props) {
                                         <select onChange={handleChange} name={trait.proficiency_choices.type}>
                                             <option disabled selected value>Please Select</option>
                                             {trait.proficiency_choices.from.options.map(option =>
-                                                <option value={option.item.index}>{option.item.name}</option>
+                                                <option >{option.item.name}</option>
                                                 )}
                                         </select>
                                         <br />
@@ -131,7 +131,7 @@ function ChooseRaceForm(props) {
                                             <option disabled selected value>Please Select</option>
 
                                                 {race.language_options.from.options.map(language =>
-                                                    <option value={language.item.index}>{language.item.name}</option>
+                                                    <option>{language.item.name}</option>
                                                     )}
                                               
                                             </select>

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Route, Routes, Link } from 'react-router-dom'
-import Test from '../User'
+import User from '../User'
 import AuthFormPage from '../AuthFormPage'
 import CharCreationForm from '../CharCreationForm'
+import CharacterDetails from '../CharacterDetails'
 
 function App() {
   
@@ -23,9 +24,12 @@ function App() {
                 <h4 className="px-3 py-2 hover:text-white">Create Character</h4>
               </Link>
             </li>
+            <Link to='/user'>Profile</Link>
       <Routes>
         <Route path="/auth/:formType" element={<AuthFormPage />} />
         <Route path="/create-character" element={<CharCreationForm />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/character/:id" element={<CharacterDetails />}/>
       </Routes>
 
       

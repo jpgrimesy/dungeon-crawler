@@ -110,9 +110,9 @@ function ChooseClassForm(props) {
                                     {j === 0 && <><br /><p className="mt-2 line-clamp-3 font-bold text-xl/relaxed text-gray-700">{proficiency.desc}</p></>}
                                     <br />
                                     <select onChange={handleChange} name={proficiency.type}>
-                                    <option>Please Choose</option>
+                                    <option disabled selected value>Please Select</option>
                                         {proficiency.from.options.map((option) => (
-                                        <option key={option.name} value={option.item && option.item.index}>
+                                        <option key={option.name}>
                                         {option.item && <>{option.item.name}</>}
                                     </option>
                                     ))}

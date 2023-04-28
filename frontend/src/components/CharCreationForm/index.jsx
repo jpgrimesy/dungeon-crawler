@@ -9,7 +9,16 @@ import './styles.css'
 function CharCreationForm() {
     const [formData, setFormData] = useState({
         name: '',
-        race:''
+        race:'',
+        class:'',
+        proficiencies:[],
+        languages:[],
+        dex:'',
+        con:'',
+        str:'',
+        wis:'',
+        int:'',
+        cha:''
     })
     function handleChange(e) {
         e.preventDefault()
