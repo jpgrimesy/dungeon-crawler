@@ -25,18 +25,13 @@ function ChooseAbilityForm(props) {
         })
     }
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        postCharacter({...props.formData})
-        navigate('/user')
-    }
     
  return(
     <section className="shadow row">
             <div>
                 {formOptions.abilityScores && formOptions.abilityScores.map(ability => 
                     <>
-                    <div className="border-b">
+                    <div className="border-b bg-white">
                         <div className="border-l-2 border-transparent relative">
                             <input className="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-6" type="checkbox"  />
                             <header className="flex justify-between items-center p-5 pl-8 pr-8 cursor-pointer select-none tab-label" >
@@ -71,7 +66,7 @@ function ChooseAbilityForm(props) {
                 
             
             </div>
-            <button onClick={handleSubmit}>Create</button>
+            
         </section> 
  )
 }

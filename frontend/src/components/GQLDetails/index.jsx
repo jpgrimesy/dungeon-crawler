@@ -11,8 +11,8 @@ function GQLDetails(props) {
 
     return (
         <>
-        <p className="text-4xl">{props.character.name}</p>
-        <p className="text-2xl">{details && <>{details.race.name} {details.class.name}</>}</p>
+        <p className="text-4xl text-white text-center mt-40">{props.character.name}</p>
+        <p className="text-2xl text-white text-center mb-10">{details && <>{details.race.name} {details.class.name}</>}</p>
         <section class="antialiased  text-gray-600 px-4 mb-10">
             <div class="flex flex-col justify-center h-full">
                 <div class="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">

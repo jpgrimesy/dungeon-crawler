@@ -18,11 +18,15 @@ export default function User() {
     }, [data])
     useEffect(()=> {
         allCharacters().then(characters => setCharacters(characters))
-    })
+    }, [characters])
+
+    function refreshCharacters() {
+        allCharacters().then(characters => setCharacters(characters))
+    }
 
     function handleDelete(e) {
         e.preventDefault()
-        deleteCharacter(e.target.id)
+        deleteCharacter(e.target.id).then(()=>refreshCharacters())
     }
     
     function toggleForm(e) {
@@ -33,7 +37,7 @@ export default function User() {
     
     function submitEdit(e) {
         e.preventDefault()
-        editCharacter(editFormData, e.target.id)
+        editCharacter(editFormData, e.target.id).then(()=> refreshCharacters())
         setToggle(false)
     }
 
@@ -46,7 +50,7 @@ export default function User() {
 
     return (
   
-        <div class="flex flex-col justify-center items-center ">
+        <div class="flex flex-col justify-center items-center mt-40">
             <div class="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-2xl shadow-shadow-500 ">
                 <div class="mt-2 mb-8 w-full">
                     <h4 class="px-2 text-xl font-bold ">
@@ -75,15 +79,15 @@ export default function User() {
                  
                     {toggleEditForm && editIndex === character._id && 
                     <form>
-                        <input onChange={handleChange} type="text" name="name" defaultValue={character.name} />
+                        <input className='mt-20 mb-5 class="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full' onChange={handleChange} type="text" name="name" defaultValue={character.name} />
                         <br />
-                        <select onChange={handleChange} name="race">
+                        <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onChange={handleChange} name="race">
                             {choices && choices.races.map(race =>
                             <option selected={race.index === character.race} value={race.index}>{race.name}</option>
                             )
                             }
                         </select>
-                        <select onChange={handleChange} name="class" >
+                        <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onChange={handleChange} name="class" >
                             {choices && choices.classes.map(charClass =>
                             <option selected={charClass.index === character.class} value={charClass.index}>{charClass.name}</option>
                             )

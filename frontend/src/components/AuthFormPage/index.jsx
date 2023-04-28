@@ -36,54 +36,44 @@ export default function AuthFormPage() {
     }
 
     return (
-        <div className="flex items-center justify-center h-[90vh]">
-            <div className="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md">
-                <h2
-                    className="text-3xl text-center font-bold text-gray-100 mb-8">
-                    {actionText}
-                </h2>
-
-                <form className="space-y-6">
-                    <div>
-                        <label className="block text-gray-100 font-bold mb-2" htmlFor="email">
-                            Email
-                        </label>
-                        <input
-                            className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600"
-                            id="email"
-                            name="email"
-                            type="email"
-                            required
-                            placeholder="Email address"
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-gray-100 font-bold mb-2" htmlFor="password">
-                            Password
-                        </label>
-                        <input
-                            className="w-full p-2 text-gray-900 rounded-md focus:outline-none focus:ring focus:border-blue-600"
-                            id="password"
-                            name="password"
-                            type="password"
-                            minLength="6"
-                            required
-                            placeholder="Password"
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div>
-                    <button
-                        type="submit"
-                        onClick={handleSubmit}
-                        className="w-full py-2 px-4 bg-green-700 text-gray-100 rounded-md hover:bg-green-800 transition duration-300">
-                        {actionText}
-                    </button>
-
-                    </div>
-                </form>
+      
+        <div class="flex h-screen w-full items-center justify-center" >
+        <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+          <div class="text-white">
+            <div class="mb-8 flex flex-col items-center">
+              <h1 class="mb-2 text-2xl">{actionText}</h1>
+              <span class="text-gray-300">Enter Login Details</span>
             </div>
+            <form action="#">
+              <div class="mb-4 text-lg">
+                <input class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="Email address"
+                onChange={handleInputChange}
+                />
+              </div>
+      
+              <div class="mb-4 text-lg">
+                <input class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" 
+                id="password"
+                name="password"
+                type="password"
+                minLength="6"
+                required
+                placeholder="Password"
+                onChange={handleInputChange}
+                />
+              </div>
+              <div class="mt-8 flex justify-center text-lg text-black">
+                <button type="submit" onClick={handleSubmit} class="rounded-3xl bg-red-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">{actionText}</button>
+              </div> 
+            </form>
+          </div>
         </div>
+      </div>
+   
     );
 }
