@@ -32,3 +32,8 @@ export async function characterDetails(id) {
     const { data } = await axios.get(`/api/characters/${id}`, authHeader)
     return data
 }
+
+export async function editCharacter(character, id) {
+    const { data } = await axios.put(`/api/characters/${id}`, character, authHeader)
+    return data
+}

@@ -18,8 +18,6 @@ function CharacterDetails(props) {
         <>
         {character && 
         <>
-        <p className="text-4xl">{character.name}</p>
-        <p className="text-2xl">{character.race} {character.class}</p>
         <GQLDetails race={character.race} class={character.class} character={character} />
         </>
         }

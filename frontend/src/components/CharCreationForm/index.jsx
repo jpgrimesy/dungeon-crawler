@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useQuery, gql } from "@apollo/client";
 import ChooseRaceForm from "../ChooseRaceForm";
 import ChooseClassForm from "../ChooseClassForm";
 import ChooseAbilityForm from "../ChooseAbilityForm";
@@ -34,8 +32,6 @@ function CharCreationForm() {
             {!formData.race && <ChooseRaceForm formData={formData} setFormData={setFormData}/>}
             {formData.race && !formData.class && <ChooseClassForm formData={formData} setFormData={setFormData} />}
             {formData.class && <ChooseAbilityForm formData={formData} setFormData={setFormData} />}
-           
-
         </form>
     )
 } 

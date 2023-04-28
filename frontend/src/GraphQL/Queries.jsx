@@ -103,6 +103,7 @@ const RACE_DETAILS = gql `
             bonus
             ability_score {
             index
+            name
             }
         }
         languages {
@@ -132,6 +133,19 @@ const RACE_DETAILS = gql `
         }
     }
 `
+export const EDIT_CHOICES = gql `
+    query {
+        classes {
+            name
+            index
+          }
+          races {
+            index
+            name
+          }
+    }
+`
+
 
 export default function getDetails(index, index2) {
     const { data, error, loading } = useQuery(RACE_DETAILS, {

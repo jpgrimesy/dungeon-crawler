@@ -31,7 +31,6 @@ function ChooseRaceForm(props) {
     function handleRaceSelect(e) {
         e.preventDefault()
         if(language) {
-            console.log('working')
             props.setFormData({
                 ...props.formData,
                 [e.target.name]: e.target.value,
