@@ -18,7 +18,6 @@ const CharacterSchema = new mongoose.Schema(
             required: true,
             ref: 'User',
         },
-
     }
 )
 

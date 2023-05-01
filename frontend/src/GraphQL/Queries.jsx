@@ -1,4 +1,4 @@
-import {  gql, useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 export const RACES = gql`
     query {

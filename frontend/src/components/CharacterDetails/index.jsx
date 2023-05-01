@@ -9,19 +9,14 @@ function CharacterDetails(props) {
     const { id } = useParams()
    
     useEffect(() => {
-        
         characterDetails(id).then(character => setCharacter(character))
-    
     }, [])
 
     return (
         <>
         {character && 
-        <>
-        <GQLDetails race={character.race} class={character.class} character={character} />
-        </>
+            <GQLDetails race={character.race} class={character.class} character={character} />
         }
-        
         </>
     )
 }

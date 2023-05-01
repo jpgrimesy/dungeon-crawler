@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { CLASSES } from "../../GraphQL/Queries";
 import './styles.css' 
 
@@ -16,7 +16,6 @@ function ChooseClassForm(props) {
         if (data) {
            setFormOptions(data)
         }
-    
     }, [data] )
     
     if (error) {
@@ -44,7 +43,7 @@ function ChooseClassForm(props) {
        <section className="shadow row">
             <div className="tabs">
             {formOptions.classes  && formOptions.classes.map(charClass =>
-                <div className="border-b bg-white tab">
+                <div key={charClass.index} className="border-b bg-white tab">
                     <div className="border-l-2 border-transparent relative">
                         <input className="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-6" type="checkbox"  />
                         <header className="flex justify-between items-center p-5 pl-8 pr-8 cursor-pointer select-none tab-label" >
@@ -53,7 +52,7 @@ function ChooseClassForm(props) {
                             </span>
                             <div className="rounded-full border border-grey w-7 h-7 flex items-center justify-center test">
                                 {/* <!-- icon by feathericons.com --> */}
-                                <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <svg aria-hidden="true"  data-reactid="266" fill="none" height="24" stroke="#606F7B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                     <polyline points="6 9 12 15 18 9">
                                     </polyline>
                                 </svg>
@@ -76,7 +75,7 @@ function ChooseClassForm(props) {
                         </p>
                         <br />
                         {charClass.spellcasting && charClass.spellcasting.info.map(spell =>
-                            <>
+                            <article key={spell.name}>
                             <p className="mt-2 line-clamp-3 font-bold text-md/relaxed text-gray-700">
                                {spell.name}
                             </p>
@@ -84,11 +83,11 @@ function ChooseClassForm(props) {
                                 {spell.desc[0]}
                             </p>
                             <br />
-                            </>
+                            </article>
                             )}
-                        {charClass.class_levels.map(classLevel => 
-                           classLevel.features && classLevel.features.map(feature =>
-                            <>
+                        {charClass.class_levels.map((classLevel) => 
+                           classLevel.features && classLevel.features.map((feature, i) =>
+                            <article key={classLevel.__typename + i}>
                             <p className="mt-2 line-clamp-3 font-bold text-md/relaxed text-gray-700">
                                {feature.name}
                             </p>
@@ -96,35 +95,35 @@ function ChooseClassForm(props) {
                                 {feature.desc[0]}
                             </p>
                             <br />
-                            </>
+                            </article>
                             )
                            
                             )}
-                            {charClass.proficiency_choices.map((proficiency, i) => {
+                            {charClass.proficiency_choices.map(proficiency => {
 
                                 const selectElements = [];
 
                                 for (let j = 0; j < proficiency.choose; j++) {
                                 selectElements.push(
-                                    <>
+                                    <article key={proficiency.index}>
                                     {j === 0 && <><br /><p className="mt-2 line-clamp-3 font-bold text-xl/relaxed text-gray-700">{proficiency.desc}</p></>}
                                     <br />
-                                    <select onChange={handleChange} name={proficiency.type}>
-                                    <option disabled selected value>Please Select</option>
+                                    <select onChange={handleChange} name={proficiency.type} defaultValue='Please Select'>
+                                    <option disabled>Please Select</option>
                                         {proficiency.from.options.map((option) => (
-                                        <option key={option.name}>
+                                        <option key={option.item && option.item.name} value={option.item && option.item.name}>
                                         {option.item && <>{option.item.name}</>}
                                     </option>
                                     ))}
                                     </select>
                                     <br />
-                                    </>
+                                    </article>
                                     );
                                 }
 
                                 return selectElements;
                             
-                            })}
+                                })}
                                 <br />
                                 <button onClick={handleClassSelect} value={charClass.index} name='class' className="px-8 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">Choose Class</button>
                             </div>
