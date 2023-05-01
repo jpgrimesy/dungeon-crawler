@@ -48,6 +48,14 @@ export default function User() {
         })
     }
 
+    if(loading) {
+        return (
+            <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
+                <div class="border-t-transparent border-solid animate-spin  rounded-full border-red-400 border-8 h-64 w-64"></div>
+            </div>
+        )
+    }
+
     return (
         <div className="flex flex-col justify-center items-center mt-40">
             <div className="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto   bg-white bg-clip-border shadow-2xl shadow-shadow-500 ">

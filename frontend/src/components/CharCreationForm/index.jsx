@@ -39,8 +39,8 @@ function CharCreationForm() {
 
         <form className="w-3/5 text-center p-8 mx-auto">
             <input className='mt-20 mb-5 class="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full' onChange={handleChange} type='text' name='name' placeholder="Enter Name" required></input>
-            {formData.name && formData.class && 
-            <button className='bg-white rounded-xl border-2 border-red-500 px-5 py-3 text-base mb-3 font-medium text-red-500 transition duration-200 hover:bg-red-600/5 active:bg-red-700/5' type='submit' onClick={handleSubmit}>Create</button>}
+            {formData.name && formData.con && formData.dex && formData.str && formData.wis && formData.int && formData.cha &&
+            <button className='bg-white w-full rounded-xl border-2 border-red-500 px-5 py-3 text-base mb-3 font-medium text-red-500 transition duration-200 hover:bg-red-600/50 active:bg-red-700/5' type='submit' onClick={handleSubmit}>Create</button>}
             {!formData.race && <ChooseRaceForm formData={formData} setFormData={setFormData}/>}
             {formData.race && !formData.class && <ChooseClassForm formData={formData} setFormData={setFormData} />}
             {formData.class && <ChooseAbilityForm formData={formData} setFormData={setFormData} />}

@@ -9,10 +9,20 @@ function GQLDetails(props) {
         setDetails(data)
     }, [data])
 
+    if(loading) {
+        return (
+            <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
+                <div class="border-t-transparent border-solid animate-spin  rounded-full border-red-400 border-8 h-64 w-64"></div>
+            </div>
+        )
+    }
+
     return (
         <>
-        <p className="text-4xl text-white text-center mt-40">{props.character.name}</p>
-        <p className="text-2xl text-white text-center mb-10">{details && <>{details.race.name} {details.class.name}</>}</p>
+        <div class="rounded-xl bg-gray-800 bg-opacity-50 shadow-lg backdrop-blur-md max-sm:px-8">
+            <p className="text-4xl text-white text-center mt-40">{props.character.name}</p>
+            <p className="text-2xl text-white text-center mb-10">{details && <>{details.race.name} {details.class.name}</>}</p>
+        </div>
         <section className="antialiased  text-gray-600 px-4 mb-10">
             <div className="flex flex-col justify-center h-full">
                 <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
@@ -178,7 +188,7 @@ function GQLDetails(props) {
                                             </td>
                                         </tr>
                                             )}
-                                        {props.character && props.character.proficiencies[0].map(proficiency =>
+                                        {props.character.proficiencies[0] && props.character.proficiencies[0].map(proficiency =>
                                             <tr key={proficiency}>
                                                 <td className="p-2 whitespace-nowrap">
                                                     <div className="flex items-center">

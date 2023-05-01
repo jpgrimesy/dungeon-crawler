@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { CLASSES } from "../../GraphQL/Queries";
-import './styles.css' 
-
 
 
 function ChooseClassForm(props) {
-    const navigate = useNavigate()
     const { error, loading, data } = useQuery(CLASSES)
     const [formOptions, setFormOptions] = useState([])
     const [proficiencies, setProficiencies] = useState([])
@@ -18,6 +14,14 @@ function ChooseClassForm(props) {
         }
     }, [data] )
     
+    if(loading) {
+        return (
+            <div class="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
+                <div class="border-t-transparent border-solid animate-spin  rounded-full border-red-400 border-8 h-64 w-64"></div>
+            </div>
+        )
+    }
+
     if (error) {
         return <div>Error somewhere</div>
     }

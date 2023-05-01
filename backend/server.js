@@ -2,11 +2,9 @@ require('dotenv').config()
 const path = require('path');
 const express = require('express');
 const cors = require('cors')
-const db = require('./models');
 const app = express();
 const charactersCtrl = require('./controllers/characters')
 const usersCtrl = require('./controllers/users')
-
 
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));

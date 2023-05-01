@@ -14,7 +14,7 @@ export default function AuthFormPage() {
     formType === 'login' ? actionText = 'Log In' : actionText = 'Sign Up'
 
     async function handleSubmit(event) {
-    event.preventDefault()
+        event.preventDefault()
 
         if (formType === 'login') {
             const { token } = await logIn(formData)
@@ -23,7 +23,7 @@ export default function AuthFormPage() {
             const { token } = await signUp(formData)
             localStorage.setItem('userToken', token)
         }
-
+        navigate('/user')
         location.reload()
     }
 
